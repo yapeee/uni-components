@@ -1,0 +1,1 @@
+<view class="content"><block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['showDetail',['$0'],[[['list','',index]]]]]]]}}" class="cell-item" bindtap="__e">{{item.name}}</view></block></view>
