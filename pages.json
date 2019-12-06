@@ -10,6 +10,10 @@
             "path" : "pages/examples/tabs/tabs",
             "style" : {}
         }
+        ,{
+            "path" : "pages/examples/guide/guide",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

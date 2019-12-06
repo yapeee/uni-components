@@ -16,6 +16,10 @@
 					{
 						name: 'Tabs标签页',
 						value: 'tabs'
+					},
+					{
+						name: '第三方导航',
+						value: 'guide'
 					}
 				]
 			}
@@ -39,9 +43,6 @@
 			padding: 30rpx;
 			margin: 20rpx;
 			box-shadow: 0 1px 5px #ebedf0;
-			&:not(:last-child) {
-				border-bottom: 1px solid #C8C7CC;
-			}
 		}
 	}
 </style>
