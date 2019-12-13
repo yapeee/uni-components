@@ -1,17 +1,22 @@
 <template>
 	<view class="tabBlock">
 		<scroll-view scroll-x="true" :scroll-left="scrollLeft">
-			<view :class="['tabs', {'tabs--scrollable': scrollable}]" id="tab_list">
+			<view :class="['tab', {'tab--scrollable': scrollable}]" id="tab_list">
 				<view v-for="(item, index) in type"
 					  :key="index"
-					  :class="['tab__item', {'tab__item--active' : currentIndex === index}]"
-					  :style="{color: (currentIndex === index ? `${itemColor}`: '')}"
-					  :id="`tab_${index}`"
+					  class="tab__item"
+					  :style="{color: (currentIndex === index ? `${itemColor}`: `${baseColor}`)}"
+					  id="tab_item"
 					  @click="select(item, index)"
-				>{{item.title}}</view>
+				>
+					<view class="tab__item-title">
+						{{item.title}}
+					</view>
+				</view>
 			</view>
 			<view class="tab__line" 
-				  :style="{background: lineColor, width: lineStyle.width, transform: lineStyle.transform,transitionDuration: lineStyle.transitionDuration}"></view>
+				  :style="{background: lineColor, width: lineStyle.width, transform: lineStyle.transform,transitionDuration: lineStyle.transitionDuration}">
+			</view>
 		</scroll-view>
 	</view>
 </template>
@@ -25,6 +30,10 @@
 				default: ()=> {
 					return []
 				}
+			},
+			baseColor: { // 基本颜色
+				type: String,
+				default: '#969799'
 			},
 			itemColor: { // 主色调
 				type: String,
@@ -57,6 +66,7 @@
 			}
 		},
 		mounted() {
+			this.currentIndex = this.value
 			this.setLine()
 			this.scrollIntoView()
 		},
@@ -69,14 +79,16 @@
 			},
 			setLine() {
 				let lineWidth = 0, lineLeft = 0
-				this.getElementData(`#tab_${this.currentIndex}`, (data)=> {
-					console.log(data);
-					let el = data[0]
+				this.getElementData(`#tab_item`, (data)=> {
+					// console.log(list);
+					let el = data[this.currentIndex]
 					lineWidth = el.width / 2
-					lineLeft = el.width * (this.currentIndex + 0.5)
+					// lineLeft = el.width * (this.currentIndex + 0.5)  // 此种只能针对每个item长度一致的
+					lineLeft = el.width / 2 + (-data[0].left) + el.left
+					// console.log(el.left);
 					this.lineStyle = {
-						width: `${lineWidth * 2}rpx`, // 1px -> 2rpx
-						transform: `translateX(${lineLeft * 2}rpx) translateX(-50%)`,
+						width: `${lineWidth}px`,
+						transform: `translateX(${lineLeft}px) translateX(-50%)`,
 						transitionDuration: `${this.duration}s`
 					};
 				})
@@ -89,9 +101,10 @@
 				
 				this.getElementData('#tab_list', (data)=> {
 					let list = data[0]
-					this.getElementData(`#tab_${this.currentIndex}`, (data)=> {
-						let el = data[0]
-						lineLeft = el.width * (this.currentIndex + 0.5) - list.width / 2 - this.scrollLeft
+					this.getElementData(`#tab_item`, (data)=> {
+						let el = data[this.currentIndex]
+						// lineLeft = el.width * (this.currentIndex + 0.5) - list.width / 2 - this.scrollLeft
+						lineLeft = el.width / 2 + (-data[0].left) + el.left - list.width / 2 - this.scrollLeft
 						animate();
 					})
 				})
@@ -99,14 +112,14 @@
 				function animate() {
 					self.scrollLeft += lineLeft / frames;
 				    if (++count < frames) {
-						setTimeout(animate, 10);
+						setTimeout(animate, self.duration / frames);
 					}
 				}
 			},
 			getElementData(el, callback){
-				uni.createSelectorQuery().in(this).select(el).boundingClientRect().exec((data) => {
-					callback(data);
-				}); 
+				uni.createSelectorQuery().in(this).selectAll(el).boundingClientRect().exec((data) => {
+					callback(data[0]);
+				});
 			}
 		}
 	}
@@ -115,39 +128,39 @@
 <style lang="scss">
 	.tabBlock {
 		position: relative;
-	}
-	.tabs {
-		position: relative;
-		display: flex;
-		font-size: 28rpx;
-		background: #fff;
-		color: #969799;
-		padding-bottom: 15rpx;
-		white-space: nowrap;
-		.tab__item {
-			flex: 1;
-			width: 30%;
-			text-align: center;
-			line-height: 90rpx;
-			&.tab__item--active {
-				// color: #01cfc5;
+		.tab {
+			position: relative;
+			display: flex;
+			font-size: 28rpx;
+			background: #fff;
+			// color: #969799;
+			padding-bottom: 15rpx;
+			white-space: nowrap;
+			&__item {
+				flex: 1;
+				// width: 30%;
+				text-align: center;
+				line-height: 90rpx;
+				&-title {
+					margin: 0 40rpx;
+				}
+				// border: 1px solid;
+			}
+			&--scrollable {
+				.tab__item {
+					// flex: 0 0 22%;
+				}
 			}
 		}
-		&--scrollable {
-			.tab__item {
-				flex: 0 0 22%;
-			}
+		.tab__line {
+			display: block;
+			height:6rpx;
+			position: absolute;
+			bottom: 15rpx;
+			left: 0;
+			z-index: 1;
+			border-radius: 3rpx;
+			position: relative;
 		}
-	}
-	.tab__line {
-		display: block;
-		height:6rpx;
-		// background:#01cfc5;
-		position: absolute;
-		bottom: 15rpx;
-		left: 0;
-		z-index: 1;
-		border-radius: 3rpx;
-		position: relative;
 	}
 </style>

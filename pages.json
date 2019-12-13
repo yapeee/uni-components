@@ -14,6 +14,10 @@
             "path" : "pages/examples/guide/guide",
             "style" : {}
         }
+        ,{
+            "path" : "pages/examples/dropdown-select/dropdown-select",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
