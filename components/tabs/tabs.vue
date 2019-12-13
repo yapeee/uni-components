@@ -1,6 +1,6 @@
 <template>
 	<view class="tabBlock">
-		<scroll-view scroll-x="true" :scroll-left="scrollLeft">
+		<scroll-view scroll-x="true" :scroll-left="scrollLeft" @scroll="scroll">
 			<view :class="['tab', {'tab--scrollable': scrollable}]" id="tab_list">
 				<view v-for="(item, index) in type"
 					  :key="index"
@@ -14,9 +14,9 @@
 					</view>
 				</view>
 			</view>
-		<!-- 	<view class="tab__line" 
+			<view class="tab__line" 
 				  :style="{background: lineColor, width: lineStyle.width, transform: lineStyle.transform,transitionDuration: lineStyle.transitionDuration}">
-			</view> -->
+			</view>
 		</scroll-view>
 	</view>
 </template>
@@ -57,25 +57,23 @@
 		},
 		mounted() {
 			this.currentIndex = this.value
-			// this.setLine()
+			this.setLine()
 			this.scrollIntoView()
 		},
 		methods: {
 			select(item, index) {
 				this.currentIndex = index
-				// this.setLine()
+				this.setLine()
 				this.scrollIntoView()
 				this.$emit('input', this.currentIndex)
 			},
 			setLine() {
 				let lineWidth = 0, lineLeft = 0
 				this.getElementData(`#tab_item`, (data)=> {
-					// console.log(list);
 					let el = data[this.currentIndex]
 					lineWidth = el.width / 2
 					// lineLeft = el.width * (this.currentIndex + 0.5)  // 此种只能针对每个item长度一致的
 					lineLeft = el.width / 2 + (-data[0].left) + el.left
-					// console.log(el.left);
 					this.lineStyle = {
 						width: `${lineWidth}px`,
 						transform: `translateX(${lineLeft}px) translateX(-50%)`,
@@ -91,10 +89,8 @@
 				
 				this.getElementData('#tab_list', (data)=> {
 					let list = data[0]
-					console.log(list);
 					this.getElementData(`#tab_item`, (data)=> {
 						let el = data[this.currentIndex]
-						console.log(el);
 						// lineLeft = el.width * (this.currentIndex + 0.5) - list.width / 2 - this.scrollLeft
 						lineLeft = el.width / 2 + (-data[0].left) + el.left - list.width / 2 - this.scrollLeft
 						animate();
@@ -105,7 +101,6 @@
 					self.scrollLeft += lineLeft / frames;
 				    if (++count < frames) {
 						setTimeout(animate, self.duration / frames);
-						// setTimeout(animate, 200);
 					}
 				}
 			},
@@ -113,6 +108,9 @@
 				uni.createSelectorQuery().in(this).selectAll(el).boundingClientRect().exec((data) => {
 					callback(data[0]);
 				});
+			},
+			scroll(e) {
+				this.scrollLeft = e.detail.scrollLeft;
 			}
 		}
 	}
