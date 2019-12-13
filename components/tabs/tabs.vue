@@ -4,8 +4,8 @@
 			<view :class="['tab', {'tab--scrollable': scrollable}]" id="tab_list">
 				<view v-for="(item, index) in type"
 					  :key="index"
-					  class="tab__item"
-					  :style="{color: (currentIndex === index ? `${itemColor}`: `${baseColor}`)}"
+					  :class="['tab__item', {'tab__item--active': currentIndex === index}]"
+					  :style="{color: (currentIndex === index ? `${itemColor}`: '')}"
 					  id="tab_item"
 					  @click="select(item, index)"
 				>
@@ -14,9 +14,9 @@
 					</view>
 				</view>
 			</view>
-			<view class="tab__line" 
+		<!-- 	<view class="tab__line" 
 				  :style="{background: lineColor, width: lineStyle.width, transform: lineStyle.transform,transitionDuration: lineStyle.transitionDuration}">
-			</view>
+			</view> -->
 		</scroll-view>
 	</view>
 </template>
@@ -31,18 +31,8 @@
 					return []
 				}
 			},
-			baseColor: { // 基本颜色
-				type: String,
-				default: '#969799'
-			},
-			itemColor: { // 主色调
-				type: String,
-				default: '#01cfc5'
-			},
-			lineColor: { // 主色调
-				type: String,
-				default: '#01cfc5'
-			},
+			itemColor: String, // tab主色调
+			lineColor: String, // 下划线主色调
 			duration: {
 				type: Number,
 				default: 0.3
@@ -67,13 +57,13 @@
 		},
 		mounted() {
 			this.currentIndex = this.value
-			this.setLine()
+			// this.setLine()
 			this.scrollIntoView()
 		},
 		methods: {
 			select(item, index) {
 				this.currentIndex = index
-				this.setLine()
+				// this.setLine()
 				this.scrollIntoView()
 				this.$emit('input', this.currentIndex)
 			},
@@ -101,8 +91,10 @@
 				
 				this.getElementData('#tab_list', (data)=> {
 					let list = data[0]
+					console.log(list);
 					this.getElementData(`#tab_item`, (data)=> {
 						let el = data[this.currentIndex]
+						console.log(el);
 						// lineLeft = el.width * (this.currentIndex + 0.5) - list.width / 2 - this.scrollLeft
 						lineLeft = el.width / 2 + (-data[0].left) + el.left - list.width / 2 - this.scrollLeft
 						animate();
@@ -113,6 +105,7 @@
 					self.scrollLeft += lineLeft / frames;
 				    if (++count < frames) {
 						setTimeout(animate, self.duration / frames);
+						// setTimeout(animate, 200);
 					}
 				}
 			},
@@ -133,7 +126,6 @@
 			display: flex;
 			font-size: 28rpx;
 			background: #fff;
-			// color: #969799;
 			padding-bottom: 15rpx;
 			white-space: nowrap;
 			&__item {
@@ -141,10 +133,13 @@
 				// width: 30%;
 				text-align: center;
 				line-height: 90rpx;
+				color: $uni-text-color;
+				&--active {
+					color: $uni-color-primary;
+				}
 				&-title {
 					margin: 0 40rpx;
 				}
-				// border: 1px solid;
 			}
 			&--scrollable {
 				.tab__item {
@@ -161,6 +156,7 @@
 			z-index: 1;
 			border-radius: 3rpx;
 			position: relative;
+			background: $uni-color-primary;
 		}
 	}
 </style>

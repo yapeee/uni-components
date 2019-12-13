@@ -1,9 +1,9 @@
 <template>
 	<view>
-		<tabs :type="type" v-model="active"></tabs>
-		<tabs :type="type2" v-model="active2" itemColor="#03A9F4" lineColor="#03A9F4"></tabs>
+		<!-- <tabs :type="type" v-model="active"></tabs> -->
+		<!-- <tabs :type="type2" v-model="active2" itemColor="#03A9F4" lineColor="#03A9F4"></tabs> -->
 		<tabs :type="type3" v-model="active3" itemColor="#03648f" lineColor="#03648f"></tabs>
-		<tabs :type="type4" v-model="active4" itemColor="#03648f" lineColor="#03648f"></tabs>
+		<!-- <tabs :type="type4" v-model="active4" itemColor="#03648f" lineColor="#03648f"></tabs> -->
 	</view>
 </template>
 
