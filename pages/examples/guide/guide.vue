@@ -9,9 +9,9 @@
 	export default {
 		data() {
 			return {
-				latitude: 30.244300,
-				longitude: 120.215240,
-				name: '杭州大剧院'
+				latitude: 39.908823,
+				longitude: 116.397470,
+				name: '天安门'
 			}
 		},
 		methods: {

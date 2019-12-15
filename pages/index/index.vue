@@ -20,6 +20,10 @@
 					{
 						name: '第三方导航',
 						value: 'guide'
+					},
+					{
+						name: '下拉选择框',
+						value: 'dropdown-select'
 					}
 				]
 			}
@@ -43,6 +47,7 @@
 			padding: 30rpx;
 			margin: 20rpx;
 			box-shadow: 0 1px 5px #ebedf0;
+			background: #fff;
 		}
 	}
 </style>

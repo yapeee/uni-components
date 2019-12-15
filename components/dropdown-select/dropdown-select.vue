@@ -4,9 +4,11 @@
 		<view class="selected" 
 			  @click="changePopup">
 			<view class="selected__name">{{selectItem.text}}</view>
-			<view class="selected__icon o-icon-down"
+			<view class="selected__icon"
 				  :class="showClass === 'show'? 'up' : 'down'"
-			></view>
+			>
+				<text class="ms-iconfont">&#xe851;</text>
+			</view>
 			<view class="selected__tips">
 				
 			</view>
@@ -20,9 +22,6 @@
 				  :key="index"
 				   @click="choose(item)">
 				<view>{{item.text}}</view>
-				<!-- <image src="/static/hospital/choose.svg" 
-					   class="list__item-icon" 
-					   v-if="item.value === value"/> -->
 				<icon v-if="item.value === value" type="success_no_circle" size="26"/>	
 			</view>
 		</view>	
@@ -58,7 +57,6 @@
 		},
 		methods: {
 			choose(item) {
-				// this.value = item
 				this.selectItem = item
 				this.$emit('input', item.value)
 				this.closePopup()
@@ -115,11 +113,11 @@
 			margin-left: 20rpx;
 			&.down {
 				transition: transform .3s;
-				transform: rotateZ(90);
+				transform: rotateZ(0);
 			}
 			&.up {
 				transition: transform .3s;
-				transform: rotateZ(-90deg);
+				transform: rotateZ(-180deg);
 			}
 		}
 	}

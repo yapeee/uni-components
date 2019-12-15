@@ -1,7 +1,7 @@
 <template>
 	<view class="tabBlock">
 		<scroll-view scroll-x="true" :scroll-left="scrollLeft" @scroll="scroll">
-			<view :class="['tab', {'tab--scrollable': scrollable}]" id="tab_list">
+			<view class="tab" id="tab_list">
 				<view v-for="(item, index) in type"
 					  :key="index"
 					  :class="['tab__item', {'tab__item--active': currentIndex === index}]"
@@ -32,22 +32,14 @@
 				}
 			},
 			itemColor: String, // tab主色调
-			lineColor: String, // 下划线主色调
-			duration: {
-				type: Number,
-				default: 0.3
-			},
+			lineColor: String // 下划线主色调
 		},
 		data() {
 			return {
 				currentIndex: 0,
 				lineStyle: {},
-				scrollLeft: 0
-			}
-		},
-		computed: {
-			scrollable() {
-				return (this.type && this.type.length > 4)
+				scrollLeft: 0,
+				duration: 0.3
 			}
 		},
 		watch: {
@@ -119,11 +111,11 @@
 <style lang="scss">
 	.tabBlock {
 		position: relative;
+		background: #fff;
 		.tab {
 			position: relative;
 			display: flex;
 			font-size: 28rpx;
-			background: #fff;
 			padding-bottom: 15rpx;
 			white-space: nowrap;
 			&__item {
@@ -137,11 +129,6 @@
 				}
 				&-title {
 					margin: 0 40rpx;
-				}
-			}
-			&--scrollable {
-				.tab__item {
-					// flex: 0 0 22%;
 				}
 			}
 		}

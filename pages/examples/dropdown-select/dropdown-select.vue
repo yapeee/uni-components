@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<dropdown-select></dropdown-select>
+		<dropdown-select v-model="value" :list="list"></dropdown-select>
 	</view>
 </template>
 
@@ -14,6 +14,21 @@
 		},
 		data() {
 			return {
+				list: [
+					{
+						text: 'item1',
+						value: 0
+					},
+					{
+						text: 'item2',
+						value: 1
+					},
+					{
+						text: 'item3',
+						value: 2
+					}
+				],
+				value: 0
 			}
 		},
 		watch: {
