@@ -1,14 +1,20 @@
 <template>
 	<view>
-		<dropdown-select v-model="value" :list="list"></dropdown-select>
+		<dropdown-item v-model="value" :list="list"></dropdown-item>
+		<dropdown-menu>
+			<dropdown-item v-model="value2" :list="list"  @close="closeDropdown"></dropdown-item>
+			<dropdown-item v-model="value3" :list="list"  @close="closeDropdown"></dropdown-item>
+		</dropdown-menu>
 	</view>
 </template>
 
 <script>
-	import DropdownSelect from '@/components/dropdown-select/dropdown-select.vue'
+	import DropdownMenu from '@/components/dropdown-select/dropdown-menu.vue'
+	import DropdownItem from '@/components/dropdown-select/dropdown-item.vue'
 	export default {
 		components: {
-			DropdownSelect
+			DropdownMenu,
+			DropdownItem
 		},
 		props: {
 		},
@@ -28,7 +34,9 @@
 						value: 2
 					}
 				],
-				value: 0
+				value: 0,
+				value2: 0,
+				value3: 0
 			}
 		},
 		watch: {

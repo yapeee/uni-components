@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "dropdown-select": "/components/dropdown-select/dropdown-select"
+  }
+}

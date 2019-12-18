@@ -1,5 +1,5 @@
 <template>
-	<view class="dropdown-select">
+	<view class="dropdown-item">
 		<!-- selected -->
 		<view class="selected" 
 			  @click="changePopup">
@@ -94,7 +94,7 @@
 </script>
 
 <style lang="scss">
-	.dropdown-select {
+	.dropdown-item {
 		flex:1
 	}
 	.selected {
