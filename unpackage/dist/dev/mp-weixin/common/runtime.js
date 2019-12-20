@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/tabs/tabs":1,"components/dropdown-select/dropdown-select":1};
+/******/ 		var cssChunks = {"components/tabs/tabs":1,"components/dropdown-select/dropdown-item":1,"components/dropdown-select/dropdown-menu":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/tabs/tabs":"components/tabs/tabs","components/dropdown-select/dropdown-select":"components/dropdown-select/dropdown-select"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/tabs/tabs":"components/tabs/tabs","components/dropdown-select/dropdown-item":"components/dropdown-select/dropdown-item","components/dropdown-select/dropdown-menu":"components/dropdown-select/dropdown-menu"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

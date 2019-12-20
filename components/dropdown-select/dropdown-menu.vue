@@ -8,15 +8,16 @@
 	export default {
 		data() {
 			return {
-				
 			}
+		},
+		mounted() {
+			this.$on('close', this.closeDropdown)
 		},
 		methods: {
 			closeDropdown() {
-				// console.log(this.$children)
-				this.childrenRef.forEach(item => {
-					// console.log(this.$refs[item])
-					this.$refs[item].close();
+				this.$slots.default.forEach(item => {
+					// item为Vnode， componentInstance为 /*当前节点对应的组件的实例*/
+					item.componentInstance.close();
 				})
 			}
 		}

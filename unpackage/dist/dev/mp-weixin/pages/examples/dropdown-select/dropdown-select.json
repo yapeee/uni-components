@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "dropdown-select": "/components/dropdown-select/dropdown-select"
+    "dropdown-menu": "/components/dropdown-select/dropdown-menu",
+    "dropdown-item": "/components/dropdown-select/dropdown-item"
   }
 }

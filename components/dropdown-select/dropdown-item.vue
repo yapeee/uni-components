@@ -10,7 +10,6 @@
 				<text class="ms-iconfont">&#xe851;</text>
 			</view>
 			<view class="selected__tips">
-				
 			</view>
 		</view>
 		<!-- dropdown -->
@@ -69,7 +68,8 @@
 				}
 			},
 			openPopup() {
-				this.$emit('close')
+				// dropdown-select和dropdown-menu之间还有一层VNiView组件
+				this.$parent.$parent.$emit('close')
 				this.showList = true
 				this.$nextTick(() => {
 				  setTimeout(() => {

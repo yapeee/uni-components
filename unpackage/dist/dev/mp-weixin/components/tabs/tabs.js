@@ -152,6 +152,8 @@ var _default2 =
   watch: {
     value: function value() {
       this.currentIndex = this.value;
+      this.setLine();
+      this.scrollIntoView();
     } },
 
   mounted: function mounted() {

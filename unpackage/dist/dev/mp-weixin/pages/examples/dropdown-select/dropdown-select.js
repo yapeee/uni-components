@@ -120,7 +120,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var DropdownSelect = function DropdownSelect() {return __webpack_require__.e(/*! import() | components/dropdown-select/dropdown-select */ "components/dropdown-select/dropdown-select").then(__webpack_require__.bind(null, /*! @/components/dropdown-select/dropdown-select.vue */ 53));};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var DropdownMenu = function DropdownMenu() {return __webpack_require__.e(/*! import() | components/dropdown-select/dropdown-menu */ "components/dropdown-select/dropdown-menu").then(__webpack_require__.bind(null, /*! @/components/dropdown-select/dropdown-menu.vue */ 53));};var DropdownItem = function DropdownItem() {return __webpack_require__.e(/*! import() | components/dropdown-select/dropdown-item */ "components/dropdown-select/dropdown-item").then(__webpack_require__.bind(null, /*! @/components/dropdown-select/dropdown-item.vue */ 60));};var _default =
+
 
 
 
@@ -134,7 +135,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 {
   components: {
-    DropdownSelect: DropdownSelect },
+    DropdownMenu: DropdownMenu,
+    DropdownItem: DropdownItem },
 
   props: {},
 
@@ -156,8 +158,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
       value: 0,
       value2: 0,
-      value3: 0,
-      childrenRef: ['dept', 'title'] };
+      value3: 0 };
 
   },
   watch: {},
@@ -165,12 +166,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   mounted: function mounted() {
   },
   methods: {
-    closeDropdown: function closeDropdown() {var _this = this;
-      // console.log(this.$children)
-      this.childrenRef.forEach(function (item) {
-        // console.log(this.$refs[item])
-        _this.$refs[item].close();
-      });
+    closeDropdown: function closeDropdown() {
+      // console.log(this.$refs.dropdownItem);
+      console.log(1111);
+      this.$emit('close2', '111');
     } } };exports.default = _default;
 
 /***/ })

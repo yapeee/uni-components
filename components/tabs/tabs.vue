@@ -45,6 +45,8 @@
 		watch: {
 			value() {
 				this.currentIndex = this.value
+				this.setLine()
+				this.scrollIntoView()
 			}
 		},
 		mounted() {
