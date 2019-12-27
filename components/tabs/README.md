@@ -72,7 +72,6 @@ itemLeft（偏移量） = 选中item.width / 2 + （-list.left） + 选中item.l
 修复bug：设置设定位置时，组件无更新
 原因：设置了currentIndex但是没有重新渲染setLine，且回退页面是，mounted没有再次执行。
 
-
 **2019.12.13**
 修复bug：手机端选中项下划线有偏差问题
 原因：设置下划线style中的transform不能采用rpx（有偏差），需改用为px

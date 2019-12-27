@@ -1,7 +1,7 @@
 <template>
-	<view class="dropdown-menu">
+	<div class="dropdown-menu">
 		<slot></slot>
-	</view>
+	</div>
 </template>
 
 <script>
@@ -15,9 +15,8 @@
 		},
 		methods: {
 			closeDropdown() {
-				this.$slots.default.forEach(item => {
-					// item为Vnode， componentInstance为 /*当前节点对应的组件的实例*/
-					item.componentInstance.close();
+				this.$children.forEach(item =>{
+					item.close();
 				})
 			}
 		}

@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "dropdown-menu": "/components/dropdown-select/dropdown-menu",
-    "dropdown-item": "/components/dropdown-select/dropdown-item"
-  }
-}

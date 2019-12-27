@@ -1,1 +1,0 @@
-<view><view data-event-opts="{{[['tap',[['openMap',['$event']]]]]}}" class="btn" bindtap="__e">打开第三方地图</view></view>

@@ -1,9 +1,10 @@
 <template>
 	<view>
 		<!-- <dropdown-item v-model="value" :list="list"></dropdown-item> -->
-		<dropdown-menu ref='dropdown-menu'>
-			<dropdown-item ref="dropdownItem" v-model="value2" :list="list"  @close="closeDropdown"></dropdown-item>
-			<dropdown-item ref="dropdownItem" v-model="value3" :list="list"  @close="closeDropdown"></dropdown-item>
+		<view style="width: 100%; height: 300rpx;">123</view>
+		<dropdown-menu>
+			<dropdown-item v-model="value2" :list="list"></dropdown-item>
+			<dropdown-item v-model="value3" :list="list"></dropdown-item>
 		</dropdown-menu>
 	</view>
 </template>
@@ -44,11 +45,6 @@
 		mounted() {
 		},
 		methods: {
-			closeDropdown() {
-				// console.log(this.$refs.dropdownItem);
-				console.log(1111);
-				this.$emit('close2', '111')
-			}
 		}
 	}
 </script>

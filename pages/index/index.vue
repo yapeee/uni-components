@@ -24,6 +24,10 @@
 					{
 						name: '下拉选择框',
 						value: 'dropdown-select'
+					},
+					{
+						name: 'PDF预览',
+						value: 'show-pdf'
 					}
 				]
 			}

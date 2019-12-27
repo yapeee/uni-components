@@ -9,23 +9,23 @@
 			>
 				<text class="ms-iconfont">&#xe851;</text>
 			</view>
-			<view class="selected__tips">
-			</view>
 		</view>
-		<!-- dropdown -->
-		<view :class="['list', showClass]"
-			  v-if="showList"
-		>
-			<view class="list__item"
-				  v-for="(item, index) in list"
-				  :key="index"
-				   @click="choose(item)">
-				<view>{{item.text}}</view>
-				<icon v-if="item.value === value" type="success_no_circle" size="26"/>	
-			</view>
-		</view>	
-		<!-- dropdown-mask -->
-		<view :class="['dropdown-mask', showClass]" v-if="showList" @click="closePopup"></view>
+		<view class="list-block">
+			<!-- dropdown -->
+			<view :class="['list', showClass]"
+				  v-if="showList"
+			>
+				<view class="list__item"
+					  v-for="(item, index) in list"
+					  :key="index"
+					   @click="choose(item)">
+					<view>{{item.text}}</view>
+					<icon v-if="item.value === value" type="success_no_circle" size="26"/>	
+				</view>
+			</view>	
+			<!-- dropdown-mask -->
+			<view :class="['dropdown-mask', showClass]" v-if="showList" @click="closePopup"></view>
+		</view>
 	</view>
 </template>
 
@@ -68,21 +68,21 @@
 				}
 			},
 			openPopup() {
-				// dropdown-select和dropdown-menu之间还有一层VNiView组件
-				this.$parent.$parent.$emit('close')
+				// this.$parent  -> dropdown-menu
+				this.$parent.$emit('close')
 				this.showList = true
 				this.$nextTick(() => {
-				  setTimeout(() => {
-				    this.showClass = 'show'
-				  }, 30)
+					setTimeout(() => {
+						this.showClass = 'show'
+					}, 30)
 				})
 			},
 			closePopup() {
 				this.showClass = ''
 				this.$nextTick(() => {
-				  setTimeout(() => {
-				    this.showList = false
-				  }, 300)
+					setTimeout(() => {
+						this.showList = false
+					}, 300)
 				})
 			},
 			close() {
@@ -95,7 +95,7 @@
 
 <style lang="scss">
 	.dropdown-item {
-		flex:1
+		// flex:1
 	}
 	.selected {
 		position: relative;
@@ -124,9 +124,18 @@
 	.dropdown {
 		height: calc(100% - 70rpx);
 	}
+	.list-block {
+		position: fixed;
+		left: 0;
+		right: 0;
+		overflow: hidden;
+		top: 530rpx;
+		bottom: 0;
+	}
 	.list {
 		max-height: 400px;
-		overflow: scroll;
+		// overflow: scroll;
+		overflow-y: auto;
 		position: absolute;
 		left: 0;
 		right: 0;
