@@ -1,6 +1,8 @@
 <template>
 	<view>
-		<!-- <dropdown-item v-model="value" :list="list"></dropdown-item> -->
+		<dropdown-menu>
+			<dropdown-item v-model="value" :list="list"></dropdown-item>
+		</dropdown-menu>
 		<view style="width: 100%; height: 300rpx;">123</view>
 		<dropdown-menu>
 			<dropdown-item v-model="value2" :list="list"></dropdown-item>
