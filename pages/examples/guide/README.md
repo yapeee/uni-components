@@ -8,16 +8,16 @@ APP端跳转至百度地图（第三方软件）；若无，则跳转至高德�
 ## demo
 **源码：**[https://github.com/yapeee/uni-components](https://github.com/yapeee/uni-components)
 
-**测试数据：** 
-wgs84: 39.9078008469, 116.391290596
-bd09: 39.915547, 116.403909
-gcj02: 39.9091591069, 116.3974783161
+**测试数据：**   
+wgs84: 39.9078008469, 116.391290596  
+bd09: 39.915547, 116.403909  
+gcj02: 39.9091591069, 116.3974783161  
 
 ## 基础用法
 
 ```vue
 import Map from '../ms-openMap.js'
-Map.openMap(latitude, longitude, name)
+Map.openMap(latitude, longitude, name, coord_type)
 ```
 
 ## 属性说明
@@ -177,6 +177,6 @@ uni.openLocation({
 
 ## 参考
 
-[百度地图URI API](https://lbsyun.baidu.com/index.php?title=uri/api/android)
-[高德地图URI API](https://lbs.amap.com/api/amap-mobile/summary)
+[百度地图URI API](https://lbsyun.baidu.com/index.php?title=uri/api/android)  
+[高德地图URI API](https://lbs.amap.com/api/amap-mobile/summary)  
 [uni-app HTML5+ API](http://www.html5plus.org/doc/zh_cn/runtime.html#plus.runtime.openURL)
