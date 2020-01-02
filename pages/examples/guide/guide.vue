@@ -9,14 +9,21 @@
 	export default {
 		data() {
 			return {
-				latitude: 39.908823,
-				longitude: 116.397470,
+				// wgs84
+				latitude: 39.9078008469,
+				longitude: 116.391290596,
+			/* 	// bd09
+				latitude: 39.915547,
+				longitude: 116.403909, */
+			/* 	// gcj02
+				latitude: 39.9091591069,
+				longitude: 116.397478316, */
 				name: '天安门'
 			}
 		},
 		methods: {
 			openMap() {
-				Map.openMap(this.latitude, this.longitude, this.name)
+				Map.openMap(this.latitude, this.longitude, this.name, 'wgs84')
 			}
 		}
 	}

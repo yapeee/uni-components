@@ -1,4 +1,4 @@
-
+import TransformCoordinate from './transformCoordinate.js'
 function openMapByDefault(latitude, longitude, name) {
 	uni.openLocation({
 		latitude: latitude,
@@ -43,14 +43,6 @@ function openMapByIos(latitude, longitude, name) {
 	} 
 	else {
 		openMapByDefault(latitude, longitude, name)
-	/* 	// 安装百度地图
-		f = iosAppstore;
-		id = "itunes.apple.com/cn/app/bai-du-de-tu-yu-yin-dao-hang/id452186370?mt=8";
-		plus.nativeUI.confirm( "检查到您未安装百度地图，是否到商城搜索下载？", function(i){
-			if ( i.index == 0 ) {
-				f(id);
-			}
-		}) */
 	}
 }
 function openURL(url, identity ) {
@@ -61,27 +53,44 @@ function openURL(url, identity ) {
 		})
 	}, identity);
 }
+function getCoordByType(longitude, latitude, coord_type) {
+	switch (coord_type){
+		case 'gcj02':
+			return [longitude, latitude]
+			break;
+		case 'bd09':
+			return TransformCoordinate.bd09togcj02(longitude, latitude)
+			break;
+		case 'wgs84':
+			return TransformCoordinate.wgs84togcj02(longitude, latitude)
+			break;
+		default:
+			return [longitude, latitude]
+			break;
+	}
+}
 export default {
 	/* 打开地图 */
-	openMap(latitude, longitude, name) {
+	openMap(latitude, longitude, name, coord_type='gcj02') {
+		let arr = getCoordByType(longitude, latitude, coord_type)
 		// #ifdef APP-PLUS
 		switch(uni.getSystemInfoSync().platform){
 			case 'android':
 				console.log('运行Android上')
-				openMapByAndroid(latitude, longitude, name)
+				openMapByAndroid(arr[1], arr[0], name)
 				break;
 			case 'ios':
 				console.log('运行iOS上')
-				openMapByIos(latitude, longitude, name)
+				openMapByIos(arr[1], arr[0], name)
 				break;
 			default:
-				openMapByDefault(latitude, longitude, name)
+				openMapByDefault(arr[1], arr[0], name)
 				console.log('运行在开发者工具上')	
 				break;
 		}	
 		// #endif
 		// #ifndef APP-PLUS
-		openMapByDefault(latitude, longitude, name)
+		openMapByDefault(arr[1], arr[0], name)
 		// #endif
 	}
 }
