@@ -45,20 +45,18 @@
 		watch: {
 			value() {
 				this.currentIndex = this.value
-				this.setLine()
+				// this.setLine()
 				this.scrollIntoView()
 			}
 		},
 		mounted() {
 			this.currentIndex = this.value
-			this.setLine()
+			// this.setLine()
 			this.scrollIntoView()
 		},
 		methods: {
 			select(item, index) {
 				this.currentIndex = index
-				this.setLine()
-				this.scrollIntoView()
 				this.$emit('input', this.currentIndex)
 			},
 			setLine() {
@@ -86,13 +84,15 @@
 					this.getElementData(`#tab_item`, (data)=> {
 						let el = data[this.currentIndex]
 						// lineLeft = el.width * (this.currentIndex + 0.5) - list.width / 2 - this.scrollLeft
-						lineLeft = el.width / 2 + (-data[0].left) + el.left - list.width / 2 - this.scrollLeft
+						lineLeft = el.width / 2 + (-list.left) + el.left - list.width / 2 - this.scrollLeft
 						animate();
 					})
 				})
 				
 				function animate() {
-					self.scrollLeft += lineLeft / frames;
+					let scroll = Math.floor(lineLeft / frames * 1000) / 1000
+					self.scrollLeft = Math.floor((self.scrollLeft + scroll) * 1000) / 1000;
+					console.log(scroll + '========' + self.scrollLeft);
 				    if (++count < frames) {
 						setTimeout(animate, self.duration / frames);
 					}

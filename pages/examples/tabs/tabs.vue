@@ -1,13 +1,13 @@
 <template>
 	<view>
-		<tabs :type="type" v-model="active"></tabs>
-		<view class="content">{{active}}</view>
+		<!-- <tabs :type="type" v-model="active"></tabs> -->
+		<!-- <view class="content">{{active}}</view> -->
 		<tabs :type="type2" v-model="active2" itemColor="#03A9F4" lineColor="#03A9F4"></tabs>
 		<view class="content">{{active2}}</view>
-		<tabs :type="type3" v-model="active3" itemColor="#03648f" lineColor="#03648f"></tabs>
+		<!-- <tabs :type="type3" v-model="active3" itemColor="#03648f" lineColor="#03648f"></tabs>
 		<view class="content">{{active3}}</view>
 		<tabs :type="type4" v-model="active4" itemColor="#03648f" lineColor="#03648f"></tabs>
-		<view class="content">{{active4}}</view>
+		<view class="content">{{active4}}</view> -->
 	</view>
 </template>
 
@@ -70,8 +70,12 @@
 				active4: 0
 			}
 		},
+		onShow() {
+			setTimeout(()=> {
+				this.active3 = 5;
+			}, 3000)
+		},
 		methods: {
-			
 		}
 	}
 </script>
