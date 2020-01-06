@@ -17,6 +17,7 @@
 | list      | 绑定tabs栏数据          | Array  | []                 |
 | itemColor | tab选中颜色             | String | $uni-color-primary |
 | lineColor | 下划线颜色              | String | $uni-color-primary |
+| lineAnimated | 是否展示下划线滑动效果  | Boolean | false              |
 
 ## 实现方案
 
