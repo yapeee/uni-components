@@ -1,6 +1,6 @@
 <template>
-	<view class="tabBlock">
-		<scroll-view scroll-x="true" :scroll-left="scrollLeft" @scroll="scroll">
+	<view class="tabBlock" v-if="type.length > 0">
+		<scroll-view scroll-x="true" scroll-with-animation :scroll-left="tabsScrollLeft" @scroll="scroll">
 			<view class="tab" id="tab_list">
 				<view v-for="(item, index) in type"
 					  :key="index"
@@ -32,32 +32,48 @@
 				}
 			},
 			itemColor: String, // tab主色调
-			lineColor: String // 下划线主色调
+			lineColor: String ,// 下划线主色调
+			lineAnimated: { // 是否展示下划线动画
+				type: Boolean,
+				default: true
+			}
 		},
 		data() {
 			return {
 				currentIndex: 0,
 				lineStyle: {},
 				scrollLeft: 0,
+				tabsScrollLeft: 0,
 				duration: 0.3
 			}
 		},
 		watch: {
+			type() {
+				this.setTabList()
+			},
 			value() {
 				this.currentIndex = this.value
-				// this.setLine()
-				this.scrollIntoView()
+				this.setTabList()
 			}
 		},
 		mounted() {
 			this.currentIndex = this.value
-			// this.setLine()
-			this.scrollIntoView()
+			this.setTabList()
+			if(!this.lineAnimated) {
+				this.duration = 0
+			}
 		},
 		methods: {
 			select(item, index) {
-				this.currentIndex = index
-				this.$emit('input', this.currentIndex)
+				this.$emit('input', index)
+			},
+			setTabList() {
+				this.$nextTick(()=>{
+					if(this.type.length > 0) {
+						this.setLine()
+						this.scrollIntoView()
+					}
+				})
 			},
 			setLine() {
 				let lineWidth = 0, lineLeft = 0
@@ -74,29 +90,16 @@
 				})
 			},
 			scrollIntoView() {  // item滚动
-				let count = 0;
-				let frames = 30;
 				let lineLeft = 0;
-				let self = this
-				
 				this.getElementData('#tab_list', (data)=> {
 					let list = data[0]
 					this.getElementData(`#tab_item`, (data)=> {
 						let el = data[this.currentIndex]
 						// lineLeft = el.width * (this.currentIndex + 0.5) - list.width / 2 - this.scrollLeft
 						lineLeft = el.width / 2 + (-list.left) + el.left - list.width / 2 - this.scrollLeft
-						animate();
+						this.tabsScrollLeft = this.scrollLeft + lineLeft
 					})
 				})
-				
-				function animate() {
-					let scroll = Math.floor(lineLeft / frames * 1000) / 1000
-					self.scrollLeft = Math.floor((self.scrollLeft + scroll) * 1000) / 1000;
-					console.log(scroll + '========' + self.scrollLeft);
-				    if (++count < frames) {
-						setTimeout(animate, self.duration / frames);
-					}
-				}
 			},
 			getElementData(el, callback){
 				uni.createSelectorQuery().in(this).selectAll(el).boundingClientRect().exec((data) => {

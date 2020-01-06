@@ -68,6 +68,10 @@ itemLeft（偏移量） = 选中item.width / 2 + （-list.left） + 选中item.l
 ```
 
 ## 更新日志
+**2020.01.06**
+1.修复BUG：修复手机端tabs栏滑动时抖动问题。
+2.新增功能：增加tabLine（选中项下划线）动画效果可选参数。
+
 **2019.12.20**
 修复bug：设置设定位置时，组件无更新
 原因：设置了currentIndex但是没有重新渲染setLine，且回退页面是，mounted没有再次执行。

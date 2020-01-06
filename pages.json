@@ -8,7 +8,9 @@
 		}
 	    ,{
             "path" : "pages/examples/tabs/tabs",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "ms-tabs"
+			}
         }
         ,{
             "path" : "pages/examples/guide/guide",

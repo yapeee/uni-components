@@ -2,12 +2,25 @@
 	<view>
 		<!-- <tabs :type="type" v-model="active"></tabs> -->
 		<!-- <view class="content">{{active}}</view> -->
-		<tabs :type="type2" v-model="active2" itemColor="#03A9F4" lineColor="#03A9F4"></tabs>
-		<view class="content">{{active2}}</view>
-		<!-- <tabs :type="type3" v-model="active3" itemColor="#03648f" lineColor="#03648f"></tabs>
-		<view class="content">{{active3}}</view>
-		<tabs :type="type4" v-model="active4" itemColor="#03648f" lineColor="#03648f"></tabs>
-		<view class="content">{{active4}}</view> -->
+		
+		<view class="content">
+			<view class="title">不定宽item</view>
+			<tabs :type="type3" v-model="active3" itemColor="#03648f" lineColor="#03648f"></tabs>
+			<view>{{active3}}</view>
+			<!-- <tabs :type="type4" v-model="active4" itemColor="#03648f" lineColor="#03648f"></tabs>
+			<view>{{active4}}</view> -->
+		</view>
+		<view class="content">
+			<view class="title">下划线非滑动切换</view>
+			<tabs :type="type2" v-model="active2" itemColor="#03A9F4" lineColor="#03A9F4" :lineAnimated="false"></tabs>
+			<view>{{active2}}</view>
+		</view>
+		
+		<view class="content">
+			<view class="title">动态渲染数据</view>
+			<tabs :type="type5" v-model="active5" ></tabs>
+			<view class="btn" @click="setTabsValue">获取数据</view>
+		</view>
 	</view>
 </template>
 
@@ -64,18 +77,21 @@
 						title: '拾拾拾拾拾拾拾拾拾拾拾'
 					}
 				],
+				type5: [],
 				active: 0,
 				active2: 0,
 				active3: 4,
-				active4: 0
+				active4: 0,
+				active5: 0,
 			}
 		},
 		onShow() {
-			setTimeout(()=> {
-				this.active3 = 5;
-			}, 3000)
 		},
 		methods: {
+			setTabsValue() {
+				this.type5 = this.type2
+				this.active5 = 4
+			}
 		}
 	}
 </script>
@@ -84,6 +100,20 @@
 	.content {
 		background: #fff;
 		margin-bottom: 20rpx;
+		.title {
+			margin-left: 20rpx;
+			padding: 20rpx 0;
+			color: #818586;
+			border-bottom: 1px solid #f6f6f6;
+		}
+		.btn {
+			background: $uni-color-primary;
+			background: #007aff;
+			color: #fff;
+			padding: 20rpx;
+			display: inline-block;
+			border-radius: 10rpx;
+		}
 	}
 
 </style>
