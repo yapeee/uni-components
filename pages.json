@@ -24,6 +24,10 @@
             "path" : "pages/examples/show-pdf/show-pdf",
             "style" : {}
         }
+        ,{
+            "path" : "pages/examples/calendar/calendar",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

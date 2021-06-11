@@ -1,30 +1,35 @@
 <template>
-	<view class="dropdown-item">
+	<div class="dropdown-item">
 		<!-- selected -->
 		<view class="dropdown-item__selected" 
 			  @click="changePopup">
-			<view class="selected__name">{{selectItem.text}}</view>
+			<view class="selected__name">{{list.length > 0 ? selectItem.text : title}}</view>
 			<view class="selected__icon"
 				  :class="showClass === 'show'? 'up' : 'down'"
 			>
-				<text class="ms-iconfont">&#xe851;</text>
+				<span class="iconfont">&#xe851;</span>
 			</view>
 		</view>
 		<view class="dropdown-item__content" :style="{top: contentTop + 'px'}" v-if="showList">
 			<!-- dropdown -->
 			<view :class="['list', showClass]">
-				<view class="list__option"
-					  v-for="(item, index) in list"
-					  :key="index"
-					   @click="choose(item)">
-					<view>{{item.text}}</view>
-					<icon v-if="item.value === value" type="success_no_circle" size="26"/>	
-				</view>
+				<block v-if="list.length > 0">
+					<view class="list__option"
+						  v-for="(item, index) in list"
+						  :key="index"
+						   @click="choose(item)">
+						<view>{{item.text}}</view>
+						<icon v-if="item.value === value" type="success_no_circle" size="26"/>	
+					</view>
+				</block>
+				<block v-else>
+					<slot></slot>
+				</block>
 			</view>	
 			<!-- dropdown-mask -->
 			<view :class="['dropdown-mask', showClass]" v-if="showList" @click="closePopup"></view>
 		</view>
-	</view>
+	</div>
 </template>
 
 <script>
@@ -36,8 +41,12 @@
 				type: Number
 			},
 			list: {
-				type: Array
-			}
+				type: Array,
+				default: ()=> {
+					return []
+				}
+			},
+			title: [Number, String]
 		},
 		data() {
 			return {
@@ -52,6 +61,13 @@
 		mounted() {
 			this.showList = this.active;
 			this.selectItem = this.list[this.value];
+			// document.addEventListener('click', e => {
+			// 	//this.$el 可以获取当前组件的容器节点
+			// 	if (!this.$el.contains(e.target)) {
+			// 		console.log('change');
+			// 		this.close()
+			// 	}
+			// });
 		},
 		methods: {
 			choose(item) {
@@ -71,9 +87,6 @@
 				this.$parent.$emit('close')
 				this.showList = true
 				this.$nextTick(() => {
-					// setTimeout(() => {
-					// 	this.showClass = 'show'
-					// }, 30)
 					this.getElementData('.dropdown-item__selected', (data)=>{
 						this.contentTop = data[0].bottom
 						this.showClass = 'show'
@@ -100,15 +113,32 @@
 </script>
 
 <style lang="scss">
+	@font-face {
+	  font-family: 'iconfont';  /* project id 1564327 */
+	  src: url('https://at.alicdn.com/t/font_1564327_fcszez4n5i.eot');
+	  src: url('https://at.alicdn.com/t/font_1564327_fcszez4n5i.eot?#iefix') format('embedded-opentype'),
+	  url('https://at.alicdn.com/t/font_1564327_fcszez4n5i.woff2') format('woff2'),
+	  url('https://at.alicdn.com/t/font_1564327_fcszez4n5i.woff') format('woff'),
+	  url('https://at.alicdn.com/t/font_1564327_fcszez4n5i.ttf') format('truetype'),
+	  url('https://at.alicdn.com/t/font_1564327_fcszez4n5i.svg#iconfont') format('svg');
+	}
+	.iconfont{
+		font-family:"iconfont" !important;
+		font-size:28rpx;
+		font-style:normal;
+		-webkit-font-smoothing: antialiased;
+		-webkit-text-stroke-width: 0.2px;
+		-moz-osx-font-smoothing: grayscale;
+	}
 	.dropdown-item {
+		width: 100%;
 		flex:1;
 		&__selected {
 			position: relative;
-			// z-index: 9;
 			display: flex;
 			align-items: center;
 			background: #fff;
-			padding: 34rpx 30rpx;
+			padding: 30rpx;
 			box-sizing: border-box;
 			justify-content: center;
 			.selected__name {
@@ -131,12 +161,11 @@
 			left: 0;
 			right: 0;
 			overflow: hidden;
-			top: 530rpx;
+			top: 0;
 			bottom: 0;
 			z-index: 1;
 			.list {
 				max-height: 400px;
-				// overflow: scroll;
 				overflow-y: auto;
 				position: absolute;
 				left: 0;

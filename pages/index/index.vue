@@ -28,6 +28,10 @@
 					{
 						name: 'PDF预览',
 						value: 'show-pdf'
+					},
+					{
+						name: '日历选择',
+						value: 'calendar'
 					}
 				]
 			}
