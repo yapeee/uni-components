@@ -32,6 +32,10 @@
 					{
 						name: '日历选择',
 						value: 'calendar'
+					},
+					{
+						name: '通讯录索引',
+						value: 'list'
 					}
 				]
 			}

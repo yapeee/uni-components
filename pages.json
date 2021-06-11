@@ -28,6 +28,15 @@
             "path" : "pages/examples/calendar/calendar",
             "style" : {}
         }
+        ,{
+            "path" : "pages/examples/list/list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
