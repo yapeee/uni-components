@@ -41,7 +41,7 @@
 			}
 		},
 		onLoad() {
-
+			console.log(111);
 		},
 		methods: {
 			showDetail(item) {
